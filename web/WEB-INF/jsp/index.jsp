@@ -12,5 +12,8 @@
   </head>
   <body>
 ${hello}
+
+  <br>
+  ${user}
   </body>
 </html>

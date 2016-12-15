@@ -23,10 +23,18 @@
 	<!-- 简单处理器映射器：
 		 把Url进行集中配置
 	 -->
-
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/mine.do">userController</prop>
+				<prop key="/a.do">httpController</prop>
+				<prop key="/b.do">userController</prop>
+			</props>
+		</property>
+	</bean>
 
 	 <!-- 定义通过: 类名.do 形式来访问controller -->
-
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 	<!-- 配置处理器适配器执行Controlelr ,springmvc默认的
 	SimpleControllerHandlerAdapter:执行Controller
 	-->
@@ -35,11 +43,16 @@
 	<!-- HttpRequestHandlerAdapter负责执行实现接口HttpRequestHandler的后端
 		 控制器。
 	 -->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
 
 	<!-- 配置自定义Controler -->
-	<bean class="rj.controller.UserController" name="/hello.do"/>
+	<bean id="userController"  class="rj.controller.UserController" name="/hello.do"/>
 	<!-- 配置自定义HttpController -->
-
+	<bean id="httpController" class="rj.controller.HttpController"/>
+	<!--配置commandcontroller-->
+	<bean name="/command.do" class="rj.controller.CommandController"/>
+	<!--配置toaddcontroller-->
+	<bean name="/toAdd.do" class="rj.controller.ToAddController"/>
 
 
 	<!-- 配置sprigmvc视图解析器：解析逻辑试图
